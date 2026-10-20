@@ -1,0 +1,77 @@
+[project]
+name = "cookipy"
+version = "1.0.0"
+description = "A fresh batch of Python, ready to cut. 🍪"
+license = { file = "LICENSE" }
+readme = "README.md"
+
+authors = [
+    { name = "José Carlos Ribeiro Vieira", email = "josecarlosvieir@hotmail.com" },
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+]
+
+requires-python = ">=3.12"
+
+dependencies = [
+]
+
+[project.urls]
+Homepage = "https://github.com/JoseCVieira/cookipy"
+Documentation = "https://github.com/JoseCVieira/cookipy"
+Repository = "https://github.com/JoseCVieira/cookipy"
+Issues = "https://github.com/JoseCVieira/cookipy/issues"
+
+[dependency-groups]
+dev = [
+    "mbake >=1.4.6",
+    "pre-commit >=4.7.0",
+    "pyrefly >=1.3.2",
+    "pytest >=9.1.1",
+    "pytest-cov >=7.1.0",
+    "ruff >=0.17.0",
+    "shellcheck-py >=0.11.0.1",
+    "shfmt-py >=4.2.0",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # import sorting
+    "UP",   # pyupgrade
+    "B",    # bugbear
+    "S",    # security
+    "D",    # docstrings
+    "ARG",  # unused arguments
+    "SIM",  # simplify
+    "PL",   # pylint
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "PL", "S"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.uv]
+package = false
+default-groups = "all"
