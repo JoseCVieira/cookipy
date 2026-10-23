@@ -80,6 +80,9 @@ quote-style = "double"
 indent-style = "space"
 docstring-code-format = true
 
+[tool.coverage.report]
+omit = ["**/{{cookiecutter.artifact}}/**"]
+
 [tool.uv]
 package = false
 default-groups = "all"
