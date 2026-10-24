@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 
-from tests.helpers import Bake, choices
+from tests.helpers import AUTHOR, Bake, choices
 
 # license -> (first line, last line); guards against wrong or truncated text.
 LICENSES = {
@@ -30,23 +30,19 @@ COPYRIGHT_LINES = {
 }
 VERBATIM = [name for name in LICENSES if name not in COPYRIGHT_LINES]
 
-AUTHOR = "Wren Bakewell"
 
-
-def test_whenLicenseChoicesChange_expectEveryChoiceIsCovered() -> None:
+def test_whenLicenseChoicesAreListed_expectEveryChoiceIsCovered() -> None:
     assert set(LICENSES) == set(choices()["license"])
 
 
-def test_whenNoLicenseIsChosen_expectMit(bake: Bake) -> None:
+def test_whenLicenseIsNotSet_expectMitLicense(bake: Bake) -> None:
     text = (bake() / "LICENSE").read_text()
 
     assert text.strip().splitlines()[0] == LICENSES["MIT"][0]
 
 
 @pytest.mark.parametrize("license", LICENSES)
-def test_whenLicenseIsChosen_expectOnlyThatLicenseFile(
-    bake: Bake, license: str
-) -> None:
+def test_whenLicenseIsSet_expectOnlyThatLicenseFile(bake: Bake, license: str) -> None:
     project = bake(license=license)
     first, last = LICENSES[license]
 
@@ -82,7 +78,7 @@ def test_whenLicenseIsVerbatim_expectAuthorNotInjected(
 
 
 @pytest.mark.parametrize("license", COPYRIGHT_LINES)
-def test_whenLicenseIsRendered_expectNoLeftoverPlaceholders(
+def test_whenLicenseIsSet_expectNoLeftoverPlaceholders(
     bake: Bake, license: str
 ) -> None:
     text = (bake(license=license) / "LICENSE").read_text()
